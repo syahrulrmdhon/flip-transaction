@@ -21,7 +21,7 @@ const defaultState = {
         return {
           ...state,
           loading: false,
-          data: action.payload,
+          data: Object.values(action.payload),
           errorMsg: "",
         };
       default:
