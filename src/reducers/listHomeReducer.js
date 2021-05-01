@@ -4,6 +4,7 @@ const defaultState = {
   errorMsg: "",
   dataDetail: {},
   param: "",
+  sort: "",
   dataSearch: [],
 };
 
@@ -35,21 +36,64 @@ const listHomeReducer = (state = defaultState, action) => {
         dataDetail: state.data.filter((obj) => obj.id === action.id),
       };
     case "SEARCH_TRANSACTION":
+      const searchData = (param) => {
+        const arrayToSort =
+          state.dataSearch && state.dataSearch.length > 0
+            ? state.dataSearch
+            : state.data;
+        return arrayToSort.filter((value) => {
+          const searchStr = param.toLowerCase();
+          const nameMatches = value.beneficiary_name
+            .toLowerCase()
+            .includes(searchStr);
+          const beneficaryBankMatches = value.beneficiary_bank
+            .toLowerCase()
+            .includes(searchStr);
+          const senderBankMathes = value.sender_bank
+            .toLowerCase()
+            .includes(searchStr);
+
+          return nameMatches || beneficaryBankMatches || senderBankMathes;
+        });
+      };
       return {
         ...state,
         loading: false,
         param: action.param,
         data: state.data,
-        dataSearch: action.param !== "" ? state.data.filter(
-          value => {
-            const searchStr = action.param.toLowerCase();
-            const nameMatches = value.beneficiary_name.toLowerCase().includes(searchStr);
-            const beneficaryBankMatches = value.beneficiary_bank.toLowerCase().includes(searchStr);
-            const senderBankMathes = value.sender_bank.toLowerCase().includes(searchStr);
-      
-            return nameMatches || beneficaryBankMatches || senderBankMathes;
-          }
-        ) : [],
+        dataSearch: action.param !== "" ? searchData(action.param) : [],
+        errorMsg: "",
+      };
+    case "SORT_TRANSACTION":
+      const sortDataBy = (param) => {
+        const arrayToSort =
+          state.dataSearch && state.dataSearch.length > 0
+            ? state.dataSearch
+            : state.data;
+        if (param === "desc") {
+          return arrayToSort.sort((a, b) =>
+            b.beneficiary_name.localeCompare(a.beneficiary_name)
+          );
+        } else if (param === "newest") {
+          return arrayToSort.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
+        } else if (param === "oldest") {
+          return arrayToSort.sort(
+            (a, b) => new Date(a.created_at) - new Date(b.created_at)
+          );
+        }
+        return arrayToSort.sort((a, b) =>
+          a.beneficiary_name.localeCompare(b.beneficiary_name)
+        );
+      };
+      console.log(sortDataBy(action.param));
+      return {
+        ...state,
+        loading: false,
+        sort: action.param,
+        data: state.data,
+        dataSearch: action.param !== "" ? sortDataBy(action.param) : [],
         errorMsg: "",
       };
     default:

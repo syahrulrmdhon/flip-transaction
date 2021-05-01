@@ -17,7 +17,7 @@ const CardDetail = ({ item }) => {
       </div>
       <div className="card-id">
         <div className="right-wrapper detail">
-          <i class="fas fa-inbox" />
+          <i className="fas fa-inbox" />
         </div>
         <div className="left-wrapper detail">
           <div className="group-wrapper">

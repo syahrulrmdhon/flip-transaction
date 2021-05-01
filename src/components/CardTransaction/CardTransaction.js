@@ -27,7 +27,7 @@ const CardTransaction = ({ item }) => {
               style={{ margin: "0 7px", fontSize: "0.5em" }}
               className="fas fa-circle"
             ></i>
-            {splitDate(item.completed_at).full}
+            {splitDate(item.created_at).full}
           </span>
         </p>
       </div>

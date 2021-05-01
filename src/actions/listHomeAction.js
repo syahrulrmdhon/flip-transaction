@@ -31,3 +31,10 @@ export const searchTransaction = (param) => async (dispatch) => {
     param,
   })
 }
+
+export const sortTransaction = (param) => async (dispatch) => {
+  dispatch({
+    type: "SORT_TRANSACTION",
+    param,
+  })
+}

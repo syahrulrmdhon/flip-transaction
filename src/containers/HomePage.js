@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListHome, searchTransaction } from "../actions/listHomeAction";
+import {
+  getListHome,
+  searchTransaction,
+  sortTransaction,
+} from "../actions/listHomeAction";
 import CardTransaction from "../components/CardTransaction/CardTransaction";
 import { currencyFormat } from "../utils/currencyFormat";
 import "./HomePage.scss";
@@ -20,6 +24,10 @@ const HomePage = () => {
 
   const onSearch = (e) => {
     dispatch(searchTransaction(e));
+  };
+
+  const onFilter = (e) => {
+    dispatch(sortTransaction(e));
   };
 
   let totalAmount = 0;
@@ -51,10 +59,12 @@ const HomePage = () => {
           className="search"
           onChange={(e) => onSearch(e.target.value)}
         />
-        <select className="filter">
+        <select className="filter" onChange={(e) => onFilter(e.target.value)}>
           <option value="">Urutkan</option>
           <option value="asc">Nama A-Z</option>
           <option value="desc">Nama Z-A</option>
+          <option value="newest">Tanggal Terbaru</option>
+          <option value="oldest">Tanggal Terlama</option>
         </select>
       </div>
       {homeList &&
@@ -67,7 +77,7 @@ const HomePage = () => {
         ))}
       {homeList &&
         homeList.dataSearch &&
-        homeList.param !== "" &&
+        (homeList.param !== "" || homeList.sort) &&
         homeList.dataSearch.length > 0 &&
         homeList.dataSearch.map((item) => (
           <CardTransaction key={item.id} item={item} />

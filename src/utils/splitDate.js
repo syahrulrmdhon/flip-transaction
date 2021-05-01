@@ -21,7 +21,7 @@ export const splitDate = (date) => {
     char = Number(newDate[1].charAt(1)) - 1;
   }
   return {
-    full: `${newDate[2]} ${monthName[char - 1]} ${newDate[0]}`,
+    full: `${newDate[2]} ${monthName[char]} ${newDate[0]}`,
     fullNumber: `${newDate[2]}/${newDate[1]}/${newDate[0]}`,
     monthYear: `${monthName[char]} ${newDate[2]}`,
     month: `${monthName[char]}`,
