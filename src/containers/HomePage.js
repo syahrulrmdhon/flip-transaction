@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListHome } from "../actions/listHomeAction";
+import { getListHome, searchTransaction } from "../actions/listHomeAction";
 import CardTransaction from "../components/CardTransaction/CardTransaction";
 import { currencyFormat } from "../utils/currencyFormat";
 import "./HomePage.scss";
@@ -17,6 +17,10 @@ const HomePage = () => {
     fetchHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onSearch = (e) => {
+    dispatch(searchTransaction(e));
+  };
 
   let totalAmount = 0;
   if (homeList && homeList.data && homeList.data.length > 0) {
@@ -39,12 +43,13 @@ const HomePage = () => {
         </p>
       </div>
       <div className="search-wrapper">
-        <i class="fas fa-search" />
+        <i className="fas fa-search" />
         <input
           type="text"
           placeholder="search"
           name="search"
           className="search"
+          onChange={(e) => onSearch(e.target.value)}
         />
         <select className="filter">
           <option value="">Urutkan</option>
@@ -54,8 +59,17 @@ const HomePage = () => {
       </div>
       {homeList &&
         homeList.data &&
+        homeList.param === "" &&
+        homeList.dataSearch.length === 0 &&
         homeList.data.length > 0 &&
         homeList.data.map((item) => (
+          <CardTransaction key={item.id} item={item} />
+        ))}
+      {homeList &&
+        homeList.dataSearch &&
+        homeList.param !== "" &&
+        homeList.dataSearch.length > 0 &&
+        homeList.dataSearch.map((item) => (
           <CardTransaction key={item.id} item={item} />
         ))}
       {homeList && homeList.loading && <p>Loading....</p>}

@@ -33,7 +33,7 @@ const CardTransaction = ({ item }) => {
       </div>
       <div className="left-wrapper">
         <div className={`box-status ${item.status.toLowerCase()}`}>
-          {item.status}
+          {item.status === "SUCCESS" ? "Berhasil" : "Pengecekan"}
         </div>
       </div>
     </Link>

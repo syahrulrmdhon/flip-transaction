@@ -1,4 +1,59 @@
-.card-detail {
-  border: 1px solid red;
-  padding: 10%;
+.card-id {
+  border-radius: 5px;
+  display: flex;
+  padding: 3%;
+  margin: 2%;
+  background-color: #fff;
+  color: #000;
+  .right-wrapper {
+    width: 60%;
+    font-weight: 700;
+    &.detail {
+      width: 10%;
+      i {
+        margin: 5%;
+        font-size: 2em;
+        color: #fd6847;
+      }
+    }
+  }
+  .left-wrapper {
+    width: 40%;
+    text-align: end;
+    &.detail {
+      width: 80%;
+      text-align: left;
+    }
+    .box-status {
+      padding: 3%;
+      width: fit-content;
+      border-radius: 5px;
+      margin-left: auto;
+      &.success {
+        background: #57b587;
+        color: #fff;
+      }
+      &.pending {
+        border: 1px solid #fd6847;
+      }
+    }
+  }
+  .group-wrapper {
+    margin: 2%;
+    margin-bottom: 5%;
+    .uniq-code {
+      font-weight: 700;
+    }
+  }
+}
+.wrap-link {
+  margin: 5% 2%;
+  margin-bottom: 10%;
+}
+.link-back {
+  padding: 1%;
+  border-radius: 5px;
+  border: 1px solid #fd6847;
+  text-decoration: none;
+  color: #fd6847;
 }

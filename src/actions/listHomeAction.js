@@ -5,9 +5,7 @@ export const getListHome = () => async (dispatch) => {
     dispatch({
       type: "TRANSACTION_LIST_LOADING",
     });
-    const res = await axios.get(
-      `https://nextar.flip.id/frontend-test`
-    );
+    const res = await axios.get(`https://nextar.flip.id/frontend-test`);
 
     dispatch({
       type: "TRANSACTION_LIST_SUCCESS",
@@ -19,3 +17,17 @@ export const getListHome = () => async (dispatch) => {
     });
   }
 };
+
+export const getDetailTransaction = (id) => async (dispatch) => {
+  dispatch({
+    type: "DETAIL_TRANSACTION",
+    id,
+  });
+};
+
+export const searchTransaction = (param) => async (dispatch) => {
+  dispatch({
+    type: "SEARCH_TRANSACTION",
+    param,
+  })
+}
