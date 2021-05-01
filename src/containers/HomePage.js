@@ -46,7 +46,7 @@ const HomePage = () => {
         <i className="fas fa-search" />
         <input
           type="text"
-          placeholder="search"
+          placeholder="Cari nama atau bank"
           name="search"
           className="search"
           onChange={(e) => onSearch(e.target.value)}
