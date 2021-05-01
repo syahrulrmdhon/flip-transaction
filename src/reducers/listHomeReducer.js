@@ -29,11 +29,15 @@ const listHomeReducer = (state = defaultState, action) => {
         errorMsg: "",
       };
     case "DETAIL_TRANSACTION":
+      const arrayToSort =
+          state.dataSearch && state.dataSearch.length > 0
+            ? state.dataSearch
+            : state.data;
       return {
         ...state,
         loading: false,
         data: state.data,
-        dataDetail: state.data.filter((obj) => obj.id === action.id),
+        dataDetail: arrayToSort.filter((obj) => obj.id === action.id),
       };
     case "SEARCH_TRANSACTION":
       const searchData = (param) => {

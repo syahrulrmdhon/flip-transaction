@@ -13,12 +13,14 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const homeList = useSelector((state) => state.listHome);
 
-  const fetchHome = (page) => {
-    dispatch(getListHome(page));
+  const fetchHome = () => {
+    dispatch(getListHome());
   };
 
   useEffect(() => {
-    fetchHome();
+    if (homeList.dataSearch && homeList.dataSearch.length === 0) {
+      fetchHome();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,10 +58,15 @@ const HomePage = () => {
           type="text"
           placeholder="Cari nama atau bank"
           name="search"
+          value={homeList.param}
           className="search"
           onChange={(e) => onSearch(e.target.value)}
         />
-        <select className="filter" onChange={(e) => onFilter(e.target.value)}>
+        <select
+          className="filter"
+          value={homeList.sort}
+          onChange={(e) => onFilter(e.target.value)}
+        >
           <option value="">Urutkan</option>
           <option value="asc">Nama A-Z</option>
           <option value="desc">Nama Z-A</option>
