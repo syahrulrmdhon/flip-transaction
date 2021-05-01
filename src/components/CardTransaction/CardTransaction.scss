@@ -1,0 +1,36 @@
+.card-transaction {
+  border-radius: 5px;
+  display: flex;
+  padding: 2%;
+  margin: 2%;
+  background-color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+  &.success {
+    border-left: 5px solid #57B587;
+  }
+  &.pending {
+    border-left: 5px solid #FD6847;
+  }
+  .right-wrapper {
+    width: 60%;
+  }
+  .left-wrapper {
+    width: 40%;
+    text-align: end;
+    .box-status {
+      padding: 3%;
+      width: fit-content;
+      border-radius: 10px;
+      margin-left: auto;
+      &.success {
+        background: #57B587;
+        color: #fff;
+      }
+      &.pending {
+        border:1px solid #FD6847;
+      }
+    }
+  }
+}
