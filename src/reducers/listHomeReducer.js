@@ -87,7 +87,6 @@ const listHomeReducer = (state = defaultState, action) => {
           a.beneficiary_name.localeCompare(b.beneficiary_name)
         );
       };
-      console.log(sortDataBy(action.param));
       return {
         ...state,
         loading: false,
